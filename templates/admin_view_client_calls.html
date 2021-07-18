@@ -1,0 +1,29 @@
+{% include 'admin_header.html' %}
+<br><br><center>
+<h1>Client Call Details</h1>
+{% if data['view'] %}
+<table class="table">
+	<tr>
+		<th>Sl.No</th>
+		<th>Client Name</th>
+		<th>Company Name</th>
+		<th>Company Website</th>
+		<th>Call Type</th>
+		<th>Description</th>
+		<th></th>
+	</tr>
+	{% for i in data['view'] %}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td>{{i['first_name']}} {{i['last_name']}}</td>
+		<td>{{i['company_name']}}</td>
+		<td><a href="{{i['website']}}">{{i['website']}}</a></td>
+		<td>{{i['call_type']}}</td>
+		<td>{{i['ds']}}</td>
+		<td><a class="btn btn-success" href="admin_view_status_of_client_calls?id={{i['call_id']}}">View Call Status</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}<h3>No Call History</h3>
+{% endif %}</center>
+{% include 'footer.html' %}

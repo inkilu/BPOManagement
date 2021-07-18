@@ -1,0 +1,158 @@
+{% include 'admin_header.html' %}
+<center>
+	<form method="post" enctype="multipart/form-data">
+<br><br>
+{% if data['update_view'] %}
+
+
+		<h2>MANAGE STAFF</h2><br>
+		<table>
+			<tr>
+				<th>Choose Company</th>
+				<td>
+					<select class="form-control" required name="cname">
+						{% for i in data['cmp'] %}
+						<option value="{{i['company_id']}}">{{i['company_name']}}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Choose Staff Type</th>
+				<td><select class="form-control" required name="usertype">
+					<option value="{{data['update_view'][0]['usertype']}}">{% if data['update_view'][0]['usertype']=='technical' %}Technical{%else%}Customer Care{% endif %}</option>
+					<option value="technical">Technical</option>
+					<option value="c_care">Customer Care</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" value="{{ data['update_view'][0]['first_name'] }}" class="form-control" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input type="text" value="{{ data['update_view'][0]['last_name'] }}" class="form-control" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" pattern="[0-9]{10}" value="{{ data['update_view'][0]['sp'] }}" class="form-control" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" value="{{ data['update_view'][0]['se'] }}" class="form-control" required name="email"></td>
+			</tr>
+			<tr>
+				<th>Photo</th>
+				<td><input type="file" value="{{ data['update_view'][0]['photo'] }}" class="form-control" name="photo"></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" required name="gender" value="male">Male
+					<input type="radio" required name="gender" value="female">female</td>
+			</tr>
+			<tr>
+				<th>Age</th>
+				<td><input type="text" value="{{ data['update_view'][0]['age'] }}" class="form-control" required name="age"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-success" type="submit" name="update_submit" value="Update"></td>
+			</tr>
+		</table>
+		<br>
+
+{% else %}
+
+		<h2>MANAGE STAFF</h2><br>
+		<table>
+			<tr>
+				<th>Choose Company</th>
+				<td>
+					<select class="form-control" required name="cname">
+						{% for i in data['cmp'] %}
+						<option value="{{i['company_id']}}">{{i['company_name']}}</option>
+						{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>Choose Staff Type</th>
+				<td><select class="form-control" required name="usertype">
+					<option value="technical">Technical</option>
+					<option value="c_care">Customer Care</option>
+				</select></td>
+			</tr>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" class="form-control" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input type="text" class="form-control" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" class="form-control" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" class="form-control" required name="email"></td>
+			</tr>
+			<tr>
+				<th>Photo</th>
+				<td><input type="file" class="form-control" required name="photo"></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" required name="gender" value="male">Male
+					<input type="radio" required name="gender" value="female">female</td>
+			</tr>
+			<tr>
+				<th>Age</th>
+				<td><input type="text" class="form-control" required name="age"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-primary" type="submit" name="submit" value="Register"></td>
+			</tr>
+		</table>
+		<br>
+
+{% endif %}
+{% if data['view'] %}
+
+		<h2>STAFF DETAILS</h2>
+		<table class="table">
+			<tr>
+				<th>Sl.no</th>
+				<th>Company Name</th>
+				<th>Staff Type</th>
+				<th>Full Name</th>
+				<th>Phone</th>
+				<th>Email</th>
+				<th>Photo</th>
+				<th>Gender</th>
+				<th>Age</th>
+				<th></th>
+			</tr>
+			{% for r in data['view'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{ r['company_name'] }}</td>
+				<td>{% if r['usertype']=='c_care' %}Customer Care{% else %}Technical{% endif %}</td>
+				<td>{{ r['first_name'] }} {{ r['last_name'] }}</td>
+				<td>{{ r['sp'] }}</td>
+				<td>{{ r['se'] }}</td>
+				<td><img width="80" height="50" src="/{{ r['photo'] }}"></th>
+				<td>{{ r['gender'] }}</td>
+				<td>{{ r['age'] }}</td>
+				<td>
+					<a class="btn btn-success" href="?action=update&id={{r['sl']}}">Update</a>
+					<a class="btn btn-danger" href="?action=delete&id={{r['sl']}}">Delete</a>
+				</td>
+			</tr>
+			{% endfor %}
+		</table>
+{% endif %}
+	</form>
+
+</center>
+{% include 'footer.html' %}

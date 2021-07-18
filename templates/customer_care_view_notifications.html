@@ -1,0 +1,24 @@
+{% include 'customer_care_header.html' %}
+<center><br><br>
+	<h1>Notifications</h1><br>
+	{% if data['view'] %}
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>Sl.No</th>
+				<th>Notifications</th>
+				<th>Reply</th>
+				<td></td><td></td>
+			</tr>
+			{% for i in data['view'] %}
+			<tr>
+				<td>{{loop.index}}</td>
+				<td>{{i['message']}}</td>
+				<form method="post">{% if i['reply']=='pending' %}
+				<td><input class="form-control" type="text" required="" name="reply{{loop.index}}"></td><td><input class="btn btn-success" type="submit" name="submit{{loop.index}}"></td>{% else %}<td colspan="2">{{i['reply']}}</td>{% endif %}</form>
+			</tr>
+			{% endfor %}
+		</table>
+	{% else %}<br>
+	<h3>No Notifications</h3>{% endif %}
+</center><br>
+{% include 'footer.html' %}

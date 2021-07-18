@@ -1,0 +1,35 @@
+{% include 'admin_header.html' %}
+<center><br>
+	<h1>Company Details</h1><br>
+
+{% if data['view'] %}
+
+	<table class="table">
+		<tr>
+			<th></th>
+			<th>Sl.No</th>
+			<th>Company Name</th>
+			<th>Work Mode</th>
+			<th>Email</th>
+			<th>Phone</th>
+			<td></td>
+		</tr>
+		{% for i in data['view'] %}
+		<tr>
+			<td></td>
+			<td>{{ loop.index }}</td>
+			<td>{{i['company_name']}}</td>
+			<td>{{i['mode_of_work']}}</td>
+			<td>{{i['email']}}</td>
+			<td>{{i['phone']}}</td>
+			<td><a class="btn btn-warning" href="admin_view_client_details?id={{i['company_id']}}">View Client Details</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+
+{% else %}
+<h3>Not Available</h3>
+{% endif %}
+
+</center>
+{% include 'footer.html' %}

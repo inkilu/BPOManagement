@@ -1,0 +1,87 @@
+{% include 'company_header.html' %}
+<br><br><center>
+<h1>Manage Services</h1>
+
+{% if data['update_view'] %}
+<h2>Update Details</h2>
+<form method="post">
+	<table>
+		<tr>
+			<th>Title</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['service_title']}}" required="" pattern="[a-zA-Z\s]{0,30}" name="title"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['description']}}" required="" pattern="[a-zA-Z\s]{0,30}" name="desc"></td>
+		</tr>
+		<tr>
+			<th>Charge</th>
+			<td><input type="number" min="0" class="form-control" value="{{data['update_view'][0]['charge_for_service']}}" required="" name="cr"></td>
+		</tr>
+		<tr>
+			<th>Duration in Hours</th>
+			<td><input type="number" min="0" class="form-control" value="{{data['update_view'][0]['service_duration']}}" required="" name="dur"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><input type="submit" class="btn btn-success" name="update_submit" value="Update"></td>
+		</tr>
+	</table>
+</form>
+
+{% else %}
+<form method="post">
+	<table>
+		<tr>
+			<th>Title</th>
+			<td><input type="text" class="form-control" required="" pattern="[a-zA-Z\s]{0,30}" name="title"></td>
+		</tr>
+		<tr>
+			<th>Description</th>
+			<td><textarea class="form-control" required="" pattern="[a-zA-Z\s]{0,100}" name="desc"></textarea></td>
+		</tr>
+		<tr>
+			<th>Charge</th>
+			<td><input type="number" min="0" class="form-control"  required="" name="cr"></td>
+		</tr>
+		<tr>
+			<th>Duration in Hours</th>
+			<td><input type="number" min="0" class="form-control" required="" name="dur"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><input type="submit" class="btn btn-info" name="submit" value="Add"></td>
+		</tr>
+	</table>
+</form>
+
+{% endif %}
+
+<br><br>
+	{% if data['view'] %}
+	<h2>Service Details</h2><br>
+	<table class=table>
+		<tr><td></td><td></td>
+			<th>Sl.No</th>
+			<th>Title</th>
+			<th>Description</th>
+			<th>Charge</th>
+			<th>Duration <br>in hours</th>
+			<td></td><td></td>
+		</tr>
+		{% for i in data['view'] %}
+		<tr><td></td><td></td>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['service_title'] }}</td>
+			<td>{{ i['description'] }}</td>
+			<td>{{ i['charge_for_service'] }}</td>
+			<td>{{ i['service_duration'] }}</td>
+			<td>
+				<a class="btn btn-success" href="?action=update&id={{i['services_id']}}">Update</a>
+				<a class="btn btn-danger" href="?action=delete&id={{i['services_id']}}">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+</center>
+{% include 'footer.html' %}

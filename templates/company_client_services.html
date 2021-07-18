@@ -1,0 +1,35 @@
+{% include 'company_header.html' %}
+<br><br><center>
+<h1>Manage Client Services</h1><br>
+<br>
+	{% if data['view'] %}
+	<h2>Client Details</h2><br>
+	<table class=table>
+		<tr><td></td><td></td>
+			<th>Sl.No</th>
+			<th>Client</th>
+			<th>House Name</th>
+			<th>Place</th>
+			<th>Pincode</th>
+			<th>Phone</th>
+			<th>Email</th><td></td><td></td>
+		</tr>
+		{% for i in data['view'] %}
+		<tr><td></td><td></td>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['first_name'] }} {{ i['last_name'] }}</td>
+			<td>{{ i['house_name'] }}</td>
+			<td>{{ i['place'] }}</td>
+			<td>{{ i['pincode'] }}</td>
+			<td>{{ i['phone'] }}</td>
+			<td>{{ i['email'] }}</td>
+			<td>
+				<a class="btn btn-secondary" href="company_manage_client_service?id={{i['client_id']}}">Manage Client Service</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+</center>
+{% include 'footer.html' %}

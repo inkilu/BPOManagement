@@ -1,0 +1,25 @@
+{% include 'customer_care_header.html' %}
+<br><br><center>
+<h1>Client Call Details</h1><br>
+{% if data['view'] %}
+<table class="table" style="width: 800px">
+	<tr>
+		<th>Sl.No</th>
+		<th>Client Name</th>
+		<th>Call Type</th>
+		<th>Description</th>
+		<th></th>
+	</tr>
+	{% for i in data['view'] %}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td>{{i['first_name']}} {{i['last_name']}}</td>
+		<td>{{i['call_type']}}</td>
+		<td>{{i['des']}}</td>
+		<td><a class="btn btn-warning" href="?ccid={{i['call_id']}}">View Call Status</a></td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}<h3>No Call History</h3>
+{% endif %}</center>
+{% include 'footer.html' %}

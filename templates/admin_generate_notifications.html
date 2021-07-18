@@ -1,0 +1,49 @@
+{% include 'admin_header.html' %}
+<center><br><br>
+	<h1>Generate Notifications</h1><br>
+	<form method="post">
+		<div class="jumbotron" style="width: 500px">
+		<table>
+			<tr>
+				<th>Choose Staff</th>
+				<td><select class="form-control" name="staff">
+					{% for r in data['staffa'] %}
+					<option value="{{r['staff_id']}}">{{r['first_name']}} {{r['last_name']}}</option>
+					{% endfor %}
+				</select></td>
+			</tr>
+			<tr>
+				<th>Message Body</th>
+				<td><textarea class="form-control" name="msg"></textarea></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" class="btn btn-info" value="Send Notification"></td>
+			</tr>
+		</table>
+		</div>
+	</form>
+	<br>
+	{% if data['view'] %}
+	<h1>Notification History</h1>
+	<table class="table" style="width: 700px">
+		<tr>
+			<th>Sl.No</th>
+			<th>Staff Name</th>
+			<th>Notification</th>
+			<th>Reply</th>
+			<th>Date</th>
+		</tr>
+		{% for t in data['view'] %}
+		<tr>
+			<td>{{loop.index}}</td>
+			<td>{{t['first_name']}} {{t['last_name']}}</td>
+			<td>{{t['message']}}</td>
+			<td>{% if t['reply']=='pending' %}<label style="color: red">Not Replied</label>{% else %}{{t['reply']}}{% endif %}</td>
+			<td>{{t['date']}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+</center>
+{% include 'footer.html' %}

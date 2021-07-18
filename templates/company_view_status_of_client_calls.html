@@ -1,0 +1,29 @@
+{% include 'company_header.html' %}
+<br><br><center>
+<h1>Client Call Status</h1><br>
+{% if data['view'] %}<br>
+<table class="table" style="width: 900px">
+	<tr>
+		<th>Sl.No</th>
+		<th>Client Name</th>
+		<th>Call Type</th>
+		<th>Description <br>By Client</th>
+		<th>Description <br>By Staff</th>
+		<th>Status</th>
+		<th></th>
+	</tr>
+	{% for i in data['view'] %}
+	<tr>
+		<td>{{loop.index}}</td>
+		<td>{{i['first_name']}} {{i['last_name']}}</td>
+		<td>{{i['call_type']}}</td>
+		<td>{{i['ds']}}</td>
+		<td>{{i['update_description']}}</td>
+		<td>{{i['call_status']}}</td>
+		<td></td>
+	</tr>
+	{% endfor %}
+</table>
+{% else %}<h3>No Call History</h3>
+{% endif %}</center>
+{% include 'footer.html' %}

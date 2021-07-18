@@ -1,0 +1,34 @@
+{% include 'admin_header.html' %}
+<center><br>
+	<h1>Client Details</h1><br>
+	{% if data['view'] %}
+	<h2>Company Name: {{data['view'][0]['company_name']}}</h2><br>
+	<table class=table>
+		<tr><td></td><td></td>
+			<th>Sl.No</th>
+			<th>Client</th>
+			<th>House Name</th>
+			<th>Place</th>
+			<th>Pincode</th>
+			<th>Phone</th>
+			<th>Email</th><!-- 
+			<th></th> -->
+		</tr>
+		{% for i in data['view'] %}
+		<tr><td></td><td></td>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['first_name'] }} {{ i['last_name'] }}</td>
+			<td>{{ i['house_name'] }}</td>
+			<td>{{ i['place'] }}</td>
+			<td>{{ i['pincode'] }}</td>
+			<td>{{ i['phone'] }}</td>
+			<td>{{ i['email'] }}</td><!-- 
+			<td><a class="btn btn-success" href="?"></a></td> -->
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+	<h3>No Details Available</h3>
+	{% endif %}
+</center>
+{% include 'footer.html' %}

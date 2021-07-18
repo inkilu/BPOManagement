@@ -1,0 +1,45 @@
+{% include 'technical_header.html' %}
+<center>
+	<br><br>
+<form method="post" enctype="multipart/form-data">
+
+		<h2>MANAGE STAFF</h2><br>
+		<table>
+			<tr>
+				<th>First Name</th>
+				<td><input type="text" value="{{ data['update_view'][0]['first_name'] }}" class="form-control" required name="fname"></td>
+			</tr>
+			<tr>
+				<th>Last Name</th>
+				<td><input type="text" value="{{ data['update_view'][0]['last_name'] }}" class="form-control" required name="lname"></td>
+			</tr>
+			<tr>
+				<th>Phone</th>
+				<td><input type="text" pattern="[0-9]{10}" value="{{ data['update_view'][0]['sp'] }}" class="form-control" required name="phone"></td>
+			</tr>
+			<tr>
+				<th>Email</th>
+				<td><input type="email" value="{{ data['update_view'][0]['se'] }}" class="form-control" required name="email"></td>
+			</tr>
+			<tr>
+				<th>Photo</th>
+				<td><input type="file" value="{{ data['update_view'][0]['photo'] }}" class="form-control" name="photo"></td>
+			</tr>
+			<tr>
+				<th>Gender</th>
+				<td><input type="radio" required name="gender" value="male">Male
+					<input type="radio" required name="gender" value="female">female</td>
+			</tr>
+			<tr>
+				<th>Age</th>
+				<td><input type="text" value="{{ data['update_view'][0]['age'] }}" class="form-control" required name="age"></td>
+			</tr>
+			<tr><td><br></td></tr>
+			<tr>
+				<td colspan="2" align="center"><input class="btn btn-success" type="submit" name="update_submit" value="Update Profile"></td>
+			</tr>
+		</table>
+		<br>
+</form>
+</center>
+{% include 'footer.html' %}

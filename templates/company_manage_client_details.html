@@ -1,0 +1,114 @@
+{% include 'company_header.html' %}
+<br><br><center>
+<h1>Manage Clients</h1><br>
+
+{% if data['update_view'] %}
+<h2>Update Details</h2>
+<form method="post">
+	<table>
+		<tr>
+			<th>First Name</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['first_name']}}" required="" pattern="[a-zA-Z\s]{0,30}" name="fname"></td>
+		</tr>
+		<tr>
+			<th>Last Name</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['last_name']}}" required="" pattern="[a-zA-Z\s]{0,30}" name="lname"></td>
+		</tr>
+		<tr>
+			<th>House Name</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['house_name']}}" required="" pattern="[a-zA-Z\s]{0,30}" name="hname"></td>
+		</tr>
+		<tr>
+			<th>Place</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['place']}}" required="" pattern="[a-zA-Z\s]{0,30}" name="place"></td>
+		</tr>
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['phone']}}" required="" pattern="[0-9]{10}" name="phone"></td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td><input type="email" class="form-control" value="{{data['update_view'][0]['email']}}" required="" name="email"></td>
+		</tr>
+		<tr>
+			<th>Pincode</th>
+			<td><input type="text" class="form-control" value="{{data['update_view'][0]['pincode']}}" required="" pattern="[0-9]{6}" name="pin"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><input type="submit" class="btn btn-success" name="update_submit" value="Update"></td>
+		</tr>
+	</table>
+</form>
+
+{% else %}
+<form method="post">
+	<table>
+		<tr>
+			<th>First Name</th>
+			<td><input type="text" class="form-control" required="" pattern="[a-zA-Z\s]{0,30}" name="fname"></td>
+		</tr>
+		<tr>
+			<th>Last Name</th>
+			<td><input type="text" class="form-control" required="" pattern="[a-zA-Z\s]{0,30}" name="lname"></td>
+		</tr>
+		<tr>
+			<th>House Name</th>
+			<td><input type="text" class="form-control" required="" pattern="[a-zA-Z\s]{0,30}" name="hname"></td>
+		</tr>
+		<tr>
+			<th>Place</th>
+			<td><input type="text" class="form-control" required="" pattern="[a-zA-Z\s]{0,30}" name="place"></td>
+		</tr>
+		<tr>
+			<th>Phone</th>
+			<td><input type="text" class="form-control" required="" pattern="[0-9]{10}" name="phone"></td>
+		</tr>
+		<tr>
+			<th>Email</th>
+			<td><input type="email" class="form-control" required="" name="email"></td>
+		</tr>
+		<tr>
+			<th>Pincode</th>
+			<td><input type="text" class="form-control" required="" pattern="[0-9]{6}" name="pin"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><input type="submit" class="btn btn-info" name="submit" value="Add"></td>
+		</tr>
+	</table>
+</form>
+
+{% endif %}
+
+<br><br>
+	{% if data['view'] %}
+	<h2>Client Details</h2><br>
+	<table class=table>
+		<tr><td></td><td></td>
+			<th>Sl.No</th>
+			<th>Client</th>
+			<th>House Name</th>
+			<th>Place</th>
+			<th>Pincode</th>
+			<th>Phone</th>
+			<th>Email</th><td></td><td></td>
+		</tr>
+		{% for i in data['view'] %}
+		<tr><td></td><td></td>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['first_name'] }} {{ i['last_name'] }}</td>
+			<td>{{ i['house_name'] }}</td>
+			<td>{{ i['place'] }}</td>
+			<td>{{ i['pincode'] }}</td>
+			<td>{{ i['phone'] }}</td>
+			<td>{{ i['email'] }}</td>
+			<td>
+				<a class="btn btn-success" href="?action=update&id={{i['client_id']}}">Update</a>
+				<a class="btn btn-danger" href="?action=delete&id={{i['client_id']}}">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+</center>
+{% include 'footer.html' %}

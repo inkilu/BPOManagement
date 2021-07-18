@@ -1,0 +1,82 @@
+{% include 'company_header.html' %}
+<br><br><center>
+<h1>Manage Client Services</h1><br><br>
+
+{% if data['update_view'] %}
+<h2>Update Details</h2>
+<form method="post">
+	<table>
+		<tr>
+			<th>Choose Service</th>
+			<td>
+				<select class="form-control" required="" name="sr">
+					<option value="{{data['update_view'][0]['services_id']}}">{{data['update_view'][0]['service_title']}}</option>
+					{% for i in data['sr'] %}
+					<option value="{{i['services_id']}}">{{i['service_title']}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>Started Date</th>
+			<td><input type="date" class="form-control" value="{{data['update_view'][0]['started_date']}}" required="" name="date"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><input type="submit" class="btn btn-success" name="update_submit" value="Update"></td>
+		</tr>
+	</table>
+</form>
+
+{% else %}
+<form method="post">
+	<table>
+		<tr>
+			<th>Choose Service</th>
+			<td>
+				<select class="form-control" required="" name="sr">
+					{% for i in data['sr'] %}
+					<option value="{{i['services_id']}}">{{i['service_title']}}</option>
+					{% endfor %}
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<th>Started Date</th>
+			<td><input type="date" class="form-control" required="" name="date"></td>
+		</tr>
+		<tr>
+			<td colspan=2 align="center"><input type="submit" class="btn btn-info" name="submit" value="Add"></td>
+		</tr>
+	</table>
+</form>
+
+{% endif %}
+
+<br><br>
+	{% if data['view'] %}
+	<h2>Service Details</h2><br>
+	<table class=table>
+		<tr><td></td><td></td>
+			<th>Sl.No</th>
+			<th>Service</th>
+			<th>Started Date</th>
+			<th>Current Status</th>
+			<td></td><td></td>
+		</tr>
+		{% for i in data['view'] %}
+		<tr><td></td><td></td>
+			<td>{{ loop.index }}</td>
+			<td>{{ i['service_title'] }}</td>
+			<td>{{ i['started_date'] }}</td>
+			<td>{{ i['current_status'] }}</td>
+			<td>
+				<a class="btn btn-success" href="?action=update&sid={{i['client_service_id']}}&id={{ i['client_id'] }}">Update</a>
+				<a class="btn btn-danger" href="?action=delete&sid={{i['client_service_id']}}&id={{ i['client_id'] }}">Delete</a>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+</center>
+{% include 'footer.html' %}
